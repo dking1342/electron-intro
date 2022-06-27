@@ -1,5 +1,51 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron');
+const { shell } = require('electron/common');
 const path = require("path");
+
+const menuItems = [
+  {
+    label: "Menu",
+    submenu:[
+      {
+        label:"About"
+      }
+    ]
+  },
+  {
+    label: "File",
+    submenu:[
+      {
+        label:"Learn More",
+        click: async () => {
+          await shell.openExternal("https://www.electronjs.org/")
+        }
+      },
+      {
+        type:"separator",
+      },
+      {
+        label:"Exit",
+        click: async () => {
+          app.quit()
+        },
+      },
+    ]
+  },
+  {
+    label:"Window",
+    submenu:[
+      {
+        role:"minimize",
+      },
+      {
+        role:"close",
+      },
+    ]
+  }
+];
+
+const menu = Menu.buildFromTemplate(menuItems);
+Menu.setApplicationMenu(menu);
 
 const createWindow = () => {
   const win = new BrowserWindow({
