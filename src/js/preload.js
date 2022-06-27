@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require("electron")
+const { contextBridge, ipcRenderer } = require("electron");
 
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
@@ -13,5 +13,5 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  setImage: (data) => ipcRenderer.send("set-image",data)
+  getImage: (callback) => ipcRenderer.on("get-image", callback)
 })
