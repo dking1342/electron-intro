@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Electron Crash Course v2</title>
+    <title>Electron Crash Course | Camera</title>
   </head>
   <body>
-    <h1>Welcome to the duplicate index.html file</h1>
+    <h1>Camera Access</h1>
 
-    <script src="./renderer.js"></script>
+    <video autoplay width="400" height="500" id="camera"></video>
+    <button id="capture-image">Capture Image</button>
+
+    <script src="./../js/camera.js"></script>
   </body>
 </html>

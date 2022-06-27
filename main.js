@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu } = require('electron');
 const { shell } = require('electron/common');
 const path = require("path");
 
+
 const menuItems = [
   {
     label: "Menu",
@@ -15,7 +16,7 @@ const menuItems = [
     label: "File",
     submenu:[
       {
-        label:"Open Github",
+        label:"New Window",
         click: async () => {
           const win2 = new BrowserWindow({
             height:200,
@@ -24,10 +25,45 @@ const menuItems = [
             backgroundColor:"#444",
           })
 
-          win2.loadFile("index2.html");
-          // win2.loadURL("https://github.com")
+          win2.loadFile(path.join(__dirname, '/src/pages/index2.html')
+          );
           win2.once("ready-to-show",()=> {
             win2.show()
+          })
+        }
+      },
+      {
+        label:"Open Github",
+        click: async () => {
+          const win3 = new BrowserWindow({
+            height:200,
+            width:400,
+            show:false,
+            backgroundColor:"#444",
+          })
+
+          win3.loadURL("https://github.com")
+          win3.once("ready-to-show",()=> {
+            win3.show()
+          })
+        }
+      },
+      {
+        label:"Open Camera",
+        click: async () => {
+          const win4 = new BrowserWindow({
+            height:600,
+            width:450,
+            show:false,
+            backgroundColor:"#444",
+          })
+
+          // shows dev tools tab
+          // win4.webContents.openDevTools()
+
+          win4.loadFile(path.join(__dirname, '/src/pages/camera.html'))
+          win4.once("ready-to-show",()=> {
+            win4.show()
           })
         }
       },
@@ -61,6 +97,8 @@ const menuItems = [
   }
 ];
 
+
+// menu setup
 const menu = Menu.buildFromTemplate(menuItems);
 Menu.setApplicationMenu(menu);
 
@@ -69,7 +107,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, '/src/js/preload.js')
     }
   })
 
