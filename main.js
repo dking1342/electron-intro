@@ -52,10 +52,10 @@ const menuItems = [
         label:"Open Camera",
         click: async () => {
           const win4 = new BrowserWindow({
-            height:600,
-            width:450,
+            height:1000,
+            width:800,
             show:false,
-            backgroundColor:"#444",
+            backgroundColor:"#eee",
           })
 
           // shows dev tools tab
