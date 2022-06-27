@@ -14,6 +14,9 @@ const btn = document.querySelector("#capture-image").addEventListener("click", (
   canvas.getContext("2d").drawImage(video,0,0,canvas.width, canvas.height);
   const dataURL = canvas.toDataURL();
 
+  // sending data to main.js
+  window.electronAPI.setImage(dataURL);
+
   // setting img element
   const image = document.createElement("img");
   image.width = "150"
