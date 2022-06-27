@@ -15,6 +15,23 @@ const menuItems = [
     label: "File",
     submenu:[
       {
+        label:"Open Github",
+        click: async () => {
+          const win2 = new BrowserWindow({
+            height:200,
+            width:400,
+            show:false,
+            backgroundColor:"#444",
+          })
+
+          win2.loadFile("index2.html");
+          // win2.loadURL("https://github.com")
+          win2.once("ready-to-show",()=> {
+            win2.show()
+          })
+        }
+      },
+      {
         label:"Learn More",
         click: async () => {
           await shell.openExternal("https://www.electronjs.org/")
