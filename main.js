@@ -1,5 +1,6 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcRenderer } = require('electron');
 const { shell } = require('electron/common');
+const { ipcMain } = require('electron/main');
 const path = require("path");
 
 
@@ -56,6 +57,9 @@ const menuItems = [
             width:800,
             show:false,
             backgroundColor:"#eee",
+            webPreferences: {
+              preload: path.join(__dirname, '/src/js/cameraPreload.js')
+            }
           })
 
           // shows dev tools tab
@@ -111,11 +115,19 @@ const createWindow = () => {
     }
   })
 
+  // win.webContents.openDevTools()
+
+  ipcMain.on("set-image", (e,data) => {
+    win.webContents.send("get-image",data);
+  })
+
   win.loadFile('index.html')
 }
 
 app.whenReady().then(() => {
   createWindow()
+
+
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
