@@ -6,7 +6,7 @@ navigator.mediaDevices.getUserMedia({video:true}).then((stream) => {
   video.srcObject = stream;
 });
 
-const btn = document.querySelector("#capture-image").addEventListener("click", (e) => {
+document.querySelector("#capture-image").addEventListener("click", (e) => {
   
   const canvas = document.createElement("canvas");
   canvas.width = video.videoWidth;
@@ -24,5 +24,7 @@ const btn = document.querySelector("#capture-image").addEventListener("click", (
   image.src = dataURL;
 
   slideshow.append(image);
+
+  new Notification("Image captured",{body:"Image is successfully captured from live video"})
   
 })
